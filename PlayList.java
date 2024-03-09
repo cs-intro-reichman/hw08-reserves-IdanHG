@@ -87,7 +87,6 @@ class PlayList {
         if (i < 0 || i > this.size || this.size == this.maxSize) return false; // If i is negative or greater than the size of this list, or if the list is full, does nothing and returns false.
         if (this.size == 0 || i == this.size) { // If list is empty or if user wants to add track to the end of the list
             this.add(track); 
-            size++;
             return true;
         }
         for (int j = this.size - 1; j >= i; j--) {
@@ -161,7 +160,7 @@ class PlayList {
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
     public String titleOfShortestTrack() {
-        //if (this.size == 0) return null;
+        if (this.size == 0) return null;
         return tracks[minIndex(0)].getTitle();
     }
 
@@ -175,7 +174,7 @@ class PlayList {
         for (int i = 0; i < this.size; i++) {
             int minIndex = minIndex(i);
             Track minDuration = this.tracks[minIndex];
-            Track temp = new Track(this.tracks[i].getTitle(), this.tracks[i].getArtist(), this.tracks[i].getDuration());
+            Track temp = this.tracks[i]; // new Track(this.tracks[i].getTitle(), this.tracks[i].getArtist(), this.tracks[i].getDuration());
             this.tracks[i] = minDuration;
             this.tracks[minIndex] = temp;
         } 
